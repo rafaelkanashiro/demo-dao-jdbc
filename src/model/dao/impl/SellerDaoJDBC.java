@@ -53,17 +53,9 @@ public class SellerDaoJDBC implements SellerDao {
 			rs = st.executeQuery();
 			
 			if(rs.next()) {
-				Department dp = new Department();
-				dp.setId(rs.getInt("DepartmentId"));
-				dp.setName(rs.getString("DepName"));
+				Department dp = instantiateDepartment(rs);
 				
-				Seller obj = new Seller();
-				obj.setId(rs.getInt("Id"));
-				obj.setName(rs.getString("Name"));
-				obj.setEmail(rs.getString("Email"));
-				obj.setBirthDate(rs.getDate("birthDate"));
-				obj.setBaseSalary(rs.getDouble("baseSalary"));
-				obj.setDepartment(dp);
+				Seller obj = instantiateSeller(rs, dp);
 				return obj;
 			}
 			return null;
@@ -74,6 +66,25 @@ public class SellerDaoJDBC implements SellerDao {
 			DB.closeResultSet(rs);
 		}
 	}
+	
+	private Department instantiateDepartment(ResultSet rs) throws SQLException {
+		Department dp = new Department();
+		dp.setId(rs.getInt("DepartmentId"));
+		dp.setName(rs.getString("DepName"));
+		return dp;
+	}
+	
+	private Seller instantiateSeller(ResultSet rs, Department dp) throws SQLException {
+		Seller obj = new Seller();
+		obj.setId(rs.getInt("Id"));
+		obj.setName(rs.getString("Name"));
+		obj.setEmail(rs.getString("Email"));
+		obj.setBirthDate(rs.getDate("birthDate"));
+		obj.setBaseSalary(rs.getDouble("baseSalary"));
+		obj.setDepartment(dp);
+		return obj;
+	}
+	
 
 	@Override
 	public List<Seller> findAll() {
