@@ -38,11 +38,15 @@ public class Program {
 		System.out.println("New seller added, id: " + newSeller.getId());
 		
 		
-		System.out.println("=== TEST 4: seller update ===");
+		System.out.println("=== TEST 5: seller update ===");
 		Seller sellerUpdate = sellerDao.findById(10);
 		sellerUpdate.setName("Marcus");
 		sellerUpdate.setEmail("marcus@gmail.com");
 		sellerDao.update(sellerUpdate);
+		
+		System.out.println("=== TEST 6: seller delete ===");
+		sellerDao.deleteById(13);
+		System.out.println("Delete completed.");
 	}
 
 }
