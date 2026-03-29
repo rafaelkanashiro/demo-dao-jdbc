@@ -19,6 +19,12 @@ public class Program2 {
 		
 		System.out.println("=== TEST 3: department delete ===");
 		departmentDao.deleteById(6);
-		System.out.println("Delete completed!");
+		System.out.println("Delete completed.");
+		
+		System.out.println("=== TEST 4: department update ===");
+		Department dp3 = departmentDao.findById(7);
+		dp3.setName("Phone");
+		departmentDao.update(dp3);
+		
 	}
 }
